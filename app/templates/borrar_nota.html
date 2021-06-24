@@ -1,0 +1,29 @@
+{% extends "base.html" %} 
+
+{% block title %}
+  Borrar nota
+{% endblock %}
+
+{% block style %}
+<style>
+  .nota-item{
+    color: var(--disabled);
+
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-left: 5px solid var(--primary);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+  <form action="" method="post" novalidate>
+    <p>Estas seguro que quieres borrar esta nota?</p>
+    <div class='nota-item'>
+      <p>{{nota.desc}}</p>
+      <p class="timestamp">{{nota.timestamp.strftime('%Y-%m-%d')}}</p>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Confirmar</button>
+  </form>
+{% endblock %}

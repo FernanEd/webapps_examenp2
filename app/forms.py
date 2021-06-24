@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms import validators
+from wtforms.validators import DataRequired, Email, Length
 
 # Forms para las paginas
 # Login
@@ -16,3 +17,7 @@ class RegisterForm (FlaskForm):
     password = PasswordField('Contraseña', validators=[DataRequired(message='Por favor llene el campo')])
     password_confirm = PasswordField('Confirmar contraseña', validators=[DataRequired(message='Por favor llene el campo')])
     submit = SubmitField('Registrarse')
+
+class NotaForm (FlaskForm):
+    desc = TextAreaField('Descripción', validators=[DataRequired(message='Por favor llene el campo'), Length(max=255, message='El mensaje debe ser menor de 255')])
+    submit = SubmitField('Crear nota')

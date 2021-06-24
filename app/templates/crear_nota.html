@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+
+{% block title %}
+  Crear nueva nota
+{% endblock %}
+
+{% block content %}
+<h1>Crear una nueva nota</h1>
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
+    {{ form.desc.label }} 
+    {{ form.desc(rows=8) }} 
+
+    {% for error in form.desc.errors %}
+        <p class="danger">{{ error }}</p>
+    {% endfor %}
+
+    {{ form.submit(class='btn') }}
+  </form>
+{% endblock %}

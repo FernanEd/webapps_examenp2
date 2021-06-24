@@ -1,9 +1,9 @@
 from flask.helpers import flash
 from app import app
 from flask import render_template, url_for, redirect, request
-from app.forms import LoginForm, RegisterForm
+from app.forms import LoginForm, NotaForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_manager, LoginManager, login_required
-from app.models import User
+from app.models import Nota, User
 from app import db
 
 # ----[LOGIN]----
@@ -68,4 +68,30 @@ def logout():
 @app.route("/")
 @login_required
 def index():
-    return render_template("index.html")
+    notas = Nota.query.filter_by(user_id=current_user.id).all()
+    return render_template("index.html", notas=notas)
+
+@app.route("/crearnota", methods=['GET', 'POST'])
+@login_required
+def crearnota():
+    form=NotaForm()  
+    if form.validate_on_submit():
+        nuevanota = Nota(desc=form.desc.data, user_id=current_user.id)
+        db.session.add(nuevanota)
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    return render_template("crear_nota.html", form=form)
+
+@app.route("/borrarnota/<int:id>", methods=['GET', 'POST'])
+@login_required
+def borrarnota(id):
+    nota = Nota.query.get(id)
+
+    if request.method == 'POST':
+        db.session.delete(nota)
+        db.session.commit()
+        print(id)
+        return redirect(url_for('index'))
+
+    return render_template("borrar_nota.html", nota=nota)

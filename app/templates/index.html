@@ -1,9 +1,64 @@
 {% extends "base.html" %} 
 
 {% block title %}
-  Lol
+
+{% endblock %}
+
+{% block style %}
+<style>
+  #notas-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .notas-item{
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border: 1px solid var(--disabled);
+    border-left: 5px solid var(--primary);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } 
+
+  .timestamp{
+    color: var(--disabled);
+
+  }
+
+  .share{
+    margin-top: 1rem;
+  }
+</style>
+ 
 {% endblock %}
 
 {% block content %}
-hola
+  <a href="{{url_for('crearnota')}}">Crear nota &rarr;</a>
+  <br><br>
+  <h1>Notas</h1>
+
+  <div id='notas-wrapper'>
+    {% if notas|length == 0 %}
+    <p>No tienes notas aun.</p>
+    {% else %}
+    <p>Tienes {{notas|length}} nota(s).</p>
+    {% endif %}
+
+    {% for nota in notas %}
+      <div class='notas-item'>
+        <div>
+          <p>{{nota.desc}}</p>
+          <p class="timestamp">{{nota.timestamp.strftime('%Y-%m-%d')}}</p>
+          <a href="{{url_for('borrarnota' , id=nota.id)}}" class="share">Compartir post</a>
+        </div>
+        <div>
+          <a href="{{url_for('borrarnota' , id=nota.id)}}" class='btn btn-danger'>Borrar</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+ 
 {% endblock %}
