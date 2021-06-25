@@ -88,7 +88,6 @@ def crearnota():
 @login_required
 def borrarnota(id):
     nota = Nota.query.get(id)
-
     if request.method == 'POST':
         db.session.delete(nota)
         db.session.commit()
