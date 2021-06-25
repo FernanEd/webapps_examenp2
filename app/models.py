@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
 class Nota(db.Model):
   id                =db.Column(db.Integer,primary_key=True)
   desc              =db.Column(db.String(255))
-  timestamp         =db.Column(db.DateTime, index=True, default=datetime.now(pytz.timezone("America/Mexico_City")))
+  timestamp         =db.Column(db.DateTime, index=True, default=datetime.now(pytz.timezone("America/Monterrey")))
   user_id           =db.Column(db.Integer, db.ForeignKey("user.id"))
 
 class UUID(db.Model):
