@@ -51,7 +51,7 @@
       <div class='notas-item'>
         <div>
           <p>{{nota.desc}}</p>
-          <p class="timestamp">{{nota.timestamp.strftime('%d/%m/%Y a las %H:%M')}}</p>
+          <p class="timestamp">{{nota.timestamp | formatdate}}</p>
           <a href="{{url_for('compartirnota' , id=nota.id)}}" class="share">Compartir post</a>
         </div>
         <div>

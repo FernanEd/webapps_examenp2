@@ -6,6 +6,14 @@ from app.forms import LoginForm, NotaForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_manager, LoginManager, login_required
 from app.models import Nota, UUID, User
 from app import db
+import pytz
+from datetime import datetime, timezone
+
+# ----[DATE]----
+
+@app.template_filter('formatdate')
+def utc_to_local(utc_dt):
+    return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=pytz.timezone('America/Monterrey'))
 
 # ----[LOGIN]----
 

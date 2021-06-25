@@ -3,7 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import UUID
-import pytz
 
 class User(UserMixin, db.Model):
   id                =db.Column(db.Integer, primary_key=True)
@@ -23,7 +22,7 @@ class User(UserMixin, db.Model):
 class Nota(db.Model):
   id                =db.Column(db.Integer,primary_key=True)
   desc              =db.Column(db.String(255))
-  timestamp         =db.Column(db.DateTime, index=True, default=datetime.now(pytz.timezone("America/Monterrey")))
+  timestamp         =db.Column(db.DateTime, index=True, default=datetime.now)
   user_id           =db.Column(db.Integer, db.ForeignKey("user.id"))
 
 class UUID(db.Model):
