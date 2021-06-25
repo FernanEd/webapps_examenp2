@@ -106,7 +106,6 @@ def compartirnota(id):
     return render_template("compartir_nota.html", link=(request.url_root).removesuffix('/') + url_for('nota', id=random_uuid))
 
 @app.route("/nota/<uuid:id>", methods=['GET', 'POST'])
-@login_required
 def nota(id):
     uuid = UUID.query.get(id)
     nota = Nota.query.get(uuid.nota_id)
