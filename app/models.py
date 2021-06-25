@@ -26,6 +26,6 @@ class Nota(db.Model):
   user_id           =db.Column(db.Integer, db.ForeignKey("user.id"))
 
 class UUID(db.Model):
-  uuid              =db.Column(UUID(as_uuid=True), primary_key=True)
+  uuid              =db.Column(db.String(255), primary_key=True)
   nota_id           =db.Column(db.Integer)
   user_id           =db.Column(db.Integer, db.ForeignKey("user.id"))
