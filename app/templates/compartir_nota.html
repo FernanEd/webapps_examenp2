@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+
+{% block title %}
+  Compartir Nota
+{% endblock %}
+
+{% block style %}
+<style>
+  .nota-item{
+    color: var(--disabled);
+
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-left: 5px solid var(--primary);
+  }
+
+</style>
+{% endblock %}
+
+{% block content %}
+  <p>Link de la nota</p>
+  <a href={{link}}>{{link}}</a>
+{% endblock %}

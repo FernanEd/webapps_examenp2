@@ -13,6 +13,12 @@
     padding-left: 1rem;
     border-left: 5px solid var(--primary);
   }
+
+  .controls{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
 </style>
 {% endblock %}
 
@@ -24,6 +30,11 @@
       <p class="timestamp">{{nota.timestamp.strftime('%Y-%m-%d')}}</p>
     </div>
 
-    <button type="submit" class="btn btn-danger">Confirmar</button>
+    <div class='controls'>
+      <a href="{{url_for('index')}}" class='btn btn-disabled'>Cancelar</a>
+      <button type="submit" class="btn btn-danger">Confirmar</button>
+    </div>
   </form>
+
+  
 {% endblock %}

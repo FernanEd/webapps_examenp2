@@ -1,9 +1,10 @@
+import uuid
 from flask.helpers import flash
 from app import app
 from flask import render_template, url_for, redirect, request
 from app.forms import LoginForm, NotaForm, RegisterForm
 from flask_login import current_user, login_user, logout_user, login_manager, LoginManager, login_required
-from app.models import Nota, User
+from app.models import Nota, UUID, User
 from app import db
 
 # ----[LOGIN]----
@@ -95,3 +96,20 @@ def borrarnota(id):
         return redirect(url_for('index'))
 
     return render_template("borrar_nota.html", nota=nota)
+
+@app.route("/compartirnota/<int:id>", methods=['GET', 'POST'])
+@login_required
+def compartirnota(id):
+    random_uuid = uuid.uuid4()
+    nuevo_uuid = UUID(uuid=random_uuid, nota_id=id, user_id=current_user.id)
+    db.session.add(nuevo_uuid)
+    db.session.commit()
+    return render_template("compartir_nota.html", link=(request.url_root).removesuffix('/') + url_for('nota', id=random_uuid))
+
+@app.route("/nota/<uuid:id>", methods=['GET', 'POST'])
+@login_required
+def nota(id):
+    uuid = UUID.query.get(id)
+    nota = Nota.query.get(uuid.nota_id)
+    author = User.query.get(uuid.user_id)
+    return render_template("ver_nota.html", nota=nota, author=author)

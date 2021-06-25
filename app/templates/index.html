@@ -52,7 +52,7 @@
         <div>
           <p>{{nota.desc}}</p>
           <p class="timestamp">{{nota.timestamp.strftime('%Y-%m-%d')}}</p>
-          <a href="{{url_for('borrarnota' , id=nota.id)}}" class="share">Compartir post</a>
+          <a href="{{url_for('compartirnota' , id=nota.id)}}" class="share">Compartir post</a>
         </div>
         <div>
           <a href="{{url_for('borrarnota' , id=nota.id)}}" class='btn btn-danger'>Borrar</a>

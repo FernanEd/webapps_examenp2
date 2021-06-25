@@ -1,0 +1,35 @@
+{% extends "base.html" %} 
+
+{% block title %}
+  Borrar nota
+{% endblock %}
+
+{% block style %}
+<style>
+  .nota-item{
+    margin-top: 1rem;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-left: 5px solid var(--primary);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+  {% if nota and author %}
+  <h1>Autor: {{author.email}}</h1>
+  <h2>
+    Posteado en {{nota.timestamp.strftime('%Y-%m-%d')}}
+  </h2>
+
+  <div class='nota-item'>
+    <p>{{nota.desc}}</p>
+  </div>
+
+  {% else %}
+  <p>Esta nota fue elimanada por el autor.</p>
+  <a href="{{url_for('index')}}">&larr; Volver a inicio</a>
+  {% endif %}
+
+{% endblock %}
