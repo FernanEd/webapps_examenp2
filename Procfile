@@ -1,1 +1,1 @@
-web: flask db upgrade; flask create-admin; gunicorn examen:app
+web: flask db upgrade; gunicorn examen:app
