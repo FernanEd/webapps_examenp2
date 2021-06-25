@@ -20,7 +20,7 @@
   {% if nota and author %}
   <h1>Autor: {{author.email}}</h1>
   <h2>
-    Posteado el {{nota.timestamp.strftime('%d/%m/%Y a las %H:%M')}}
+    Posteado el {{(nota.timestamp | formatdate).strftime('%d/%m/%Y a las %H:%M')}}
   </h2>
 
   <div class='nota-item'>
